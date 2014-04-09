@@ -1,0 +1,1 @@
+grep -e 'source\|target' karate.gml | sed -e s/[^0-9]//g | sed 'N;s/\n/ /' > karate.txt
