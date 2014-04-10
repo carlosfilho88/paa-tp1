@@ -19,7 +19,6 @@ public class AdjacencyMatrixGraph extends Graph {
             edges[target][source] = weight;
     }
 
-
     public int removeEdge(int source, int target) {
     	int weight = edges[source][target];
         edges[source][target] = Integer.MAX_VALUE;

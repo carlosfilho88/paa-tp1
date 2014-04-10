@@ -14,7 +14,7 @@ class AdjacencyListElement {
     }
 
     public String toString() {
-        return "(" + target + "; " + (float) weight + ")";
+        return "(" + target + "; " + weight + ")";
     }
 }
 
@@ -31,25 +31,43 @@ public class AdjacencyListsGraph extends Graph {
             lists[i] = new LinkedList<AdjacencyListElement>();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see Graph#addEdge(int, int, double)
-     * 
-     * The new edge is added at the *front* of the adjacency list of the source
-     * node. If the Graph is undirected, it is also added at the *front* of the
-     * adjacency list of the target node.
-     * 
-     */
     public void addEdge(int source, int target, int weight) {
-
+    	if (source >= 0 && target >= 0 && source < num_nodes && target < num_nodes) {
+            if (!directed) {
+            	lists[target].addLast(new AdjacencyListElement(source, weight));
+            	lists[source].addLast(new AdjacencyListElement(target, weight));
+            } else {
+            	lists[source].addLast(new AdjacencyListElement(target, weight));
+            }
+        } else
+            throw new IndexOutOfBoundsException();
     }
 
     public int removeEdge(int source, int target) {
-        // TODO: Fill in the body of this method.
-
-        // TODO: remove next line --- added so that starter code compiles
-        return 1;
+    	if (!directed) {
+    		for (Iterator<AdjacencyListElement> iter = lists[source].iterator(); iter.hasNext();) {
+        		AdjacencyListElement e = iter.next();
+                if (e.target == target) {
+                    iter.remove();
+                }
+            }
+    		for (Iterator<AdjacencyListElement> iter = lists[target].iterator(); iter.hasNext();) {
+        		AdjacencyListElement e = iter.next();
+                if (e.target == source) {
+                    iter.remove();
+                    return e.weight;
+                }
+            }
+    	} else {
+        	for (Iterator<AdjacencyListElement> iter = lists[source].iterator(); iter.hasNext();) {
+        		AdjacencyListElement e = iter.next();
+                if (e.target == target) {
+                    iter.remove();
+                    return e.weight;
+                }
+            }
+        }
+        return Integer.MAX_VALUE;
     }
 
     public void removeAllEdges() {
@@ -78,8 +96,6 @@ public class AdjacencyListsGraph extends Graph {
     }
 
     public Graph toAltGraphRepr(Graph g) {
-        // TODO: Fill in the body of this method.
-
         return g;
     }
 
