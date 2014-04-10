@@ -76,9 +76,12 @@ public class AdjacencyListsGraph extends Graph {
     }
 
     public int weightOfEdge(int source, int target) {
-        // TODO: Fill in the body of this method.
-
-        // TODO: remove next line --- added so that starter code compiles
+		for (Iterator<AdjacencyListElement> iter = lists[source].iterator(); iter.hasNext();) {
+    		AdjacencyListElement e = iter.next();
+            if (e.target == target) {
+            	return e.weight;
+            }
+        }
         return Integer.MAX_VALUE;
     }
 

@@ -16,7 +16,7 @@ public class Main {
             g.addEdge(edges[i][0], edges[i][1], weights[i]);
 
         println("Adjacency Lists:\n" + g);
-
+        
         g.removeEdge(0, 1);
         g.removeEdge(0, 2);
         g.removeEdge(1, 2);
