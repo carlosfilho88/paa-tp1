@@ -2,19 +2,24 @@ package graph;
 
 public class Edge implements EdgeInterface {
 
-    private int source, target, weight;
+    private Integer source, target, weight;
+    
+    public Edge(Integer source, Integer target) {
+        this.source = source;
+        this.target = target;
+    }
 
-    public Edge(int source, int target, int weight) {
+    public Edge(Integer source, Integer target, Integer weight) {
         this.source = source;
         this.target = target;
         this.weight = weight;
     }
 
-    public int source() {
+    public Integer source() {
         return source;
     }
 
-    public int target() {
+    public Integer target() {
         return target;
     }
 

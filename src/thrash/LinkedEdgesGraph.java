@@ -1,4 +1,9 @@
-package graph;
+package thrash;
+
+import graph.Edge;
+import graph.EdgeInterface;
+import graph.Graph;
+import graph.Vertex;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,7 +17,7 @@ public class LinkedEdgesGraph extends Graph {
         edges = new LinkedList<EdgeInterface>();
     }
 
-    public void addEdge(int source, int target, int weight) {
+    public void addEdge(Vertex source, Vertex target, int weight) {
         if (source >= 0 && target >= 0 && source < num_nodes && target < num_nodes) {
             if (directed)
                 edges.addFirst(new Edge(source, target, weight));
@@ -25,7 +30,7 @@ public class LinkedEdgesGraph extends Graph {
             throw new IndexOutOfBoundsException();
     }
 
-    public int removeEdge(int source, int target) {
+    public int removeEdge(Vertex source, Vertex target) {
         if (!directed) {
             int from = Math.min(source, target);
             target = Math.max(source, target);

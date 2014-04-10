@@ -1,59 +1,102 @@
 package graph;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
 
 class AdjacencyListElement {
 
-	public int target;
+	public Integer target;
     public int weight;
+    
+    public AdjacencyListElement(Integer target) {
+        this.target = target;
+        this.weight = 1;
+    }
 
-    public AdjacencyListElement(int target, int weight) {
+    public AdjacencyListElement(Integer target, int weight) {
         this.target = target;
         this.weight = weight;
     }
 
     public String toString() {
-        return "(" + target + "; " + weight + ")";
+        return "" + target;
     }
+
+	
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((target == null) ? 0 : target.hashCode());
+		result = prime * result + weight;
+		return result;
+	}
+    
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AdjacencyListElement other = (AdjacencyListElement) obj;
+		if (target == null) {
+			if (other.target != null)
+				return false;
+		} else if (!target.equals(other.target))
+			return false;
+		if (weight != other.weight)
+			return false;
+		return true;
+	}
 }
 
 public class AdjacencyListsGraph extends Graph {
 
-    private LinkedList<AdjacencyListElement>[] lists;
+    private ArrayList<AdjacencyListElement>[] lists;
 
     @SuppressWarnings("unchecked")
-    public AdjacencyListsGraph(int nodes, boolean directed) {
-        super(nodes, directed);
+    public AdjacencyListsGraph(ArrayList<Integer> vertexes, List<Edge> edges, boolean directed) {
+        super(vertexes, edges, directed);
 
-        lists = new LinkedList[nodes];
-        for (int i = 0; i < nodes; i++)
-            lists[i] = new LinkedList<AdjacencyListElement>();
+        lists = new ArrayList[num_nodes];
+        for (Integer vertex : vertexes) {
+        	lists[vertex] = new ArrayList<AdjacencyListElement>();
+		}
     }
 
-    public void addEdge(int source, int target, int weight) {
-    	if (source >= 0 && target >= 0 && source < num_nodes && target < num_nodes) {
-            if (!directed) {
-            	lists[target].addLast(new AdjacencyListElement(source, weight));
-            	lists[source].addLast(new AdjacencyListElement(target, weight));
-            } else {
-            	lists[source].addLast(new AdjacencyListElement(target, weight));
-            }
-        } else
-            throw new IndexOutOfBoundsException();
+    public void addEdge(Integer source, Integer target) {
+        if (!directed) {
+			lists[target].add(new AdjacencyListElement(source));
+        	lists[source].add(new AdjacencyListElement(target));
+        } else {
+        	lists[source].add(new AdjacencyListElement(target));
+        }
+    }
+    
+    public void addEdge(Integer source, Integer target, int weight) {
+        if (!directed) {
+        	lists[target].add(new AdjacencyListElement(source, weight));
+        	lists[source].add(new AdjacencyListElement(target, weight));
+        } else {
+        	lists[source].add(new AdjacencyListElement(target, weight));
+        }
     }
 
-    public int removeEdge(int source, int target) {
+    public int removeEdge(Integer source, Integer target) {
     	if (!directed) {
     		for (Iterator<AdjacencyListElement> iter = lists[source].iterator(); iter.hasNext();) {
         		AdjacencyListElement e = iter.next();
-                if (e.target == target) {
+                if (e.target.equals(target)) {
                     iter.remove();
                 }
             }
     		for (Iterator<AdjacencyListElement> iter = lists[target].iterator(); iter.hasNext();) {
         		AdjacencyListElement e = iter.next();
-                if (e.target == source) {
+                if (e.target.equals(source)) {
                     iter.remove();
                     return e.weight;
                 }
@@ -61,7 +104,7 @@ public class AdjacencyListsGraph extends Graph {
     	} else {
         	for (Iterator<AdjacencyListElement> iter = lists[source].iterator(); iter.hasNext();) {
         		AdjacencyListElement e = iter.next();
-                if (e.target == target) {
+                if (e.target.equals(target)) {
                     iter.remove();
                     return e.weight;
                 }
@@ -75,7 +118,7 @@ public class AdjacencyListsGraph extends Graph {
             lists[i].clear();
     }
 
-    public int weightOfEdge(int source, int target) {
+    public int weightOfEdge(Integer source, Integer target) {
 		for (Iterator<AdjacencyListElement> iter = lists[source].iterator(); iter.hasNext();) {
     		AdjacencyListElement e = iter.next();
             if (e.target == target) {
@@ -88,11 +131,11 @@ public class AdjacencyListsGraph extends Graph {
     public String toString() {
         String s = "";
         for (int i = 0; i < num_nodes; i++) {
-            s += i + "->";
+            s += i + ": [";
 
             for (Iterator<AdjacencyListElement> iter = lists[i].iterator(); iter.hasNext();)
                 s += " " + iter.next();
-            s += "\n";
+            s += " ]\n";
         }
 
         return s;
@@ -102,8 +145,12 @@ public class AdjacencyListsGraph extends Graph {
         return g;
     }
 
-    public LinkedList<AdjacencyListElement> getAdjListOfNode(int i) {
-        return lists[i];
+    public ArrayList<AdjacencyListElement> getAdjListOfNode(Integer vertex) {
+        return lists[vertex];
+    }
+    
+    public ArrayList<AdjacencyListElement>[] getAdjLists() {
+        return lists;
     }
 
 }

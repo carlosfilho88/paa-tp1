@@ -1,13 +1,27 @@
 package graph;
 
-public abstract class Graph {
+import java.util.List;
 
+public abstract class Graph {
+    
+    private List<Integer> vertexes;
+    private List<Edge> edges;
     protected int num_nodes;
     protected boolean directed;
 
-    public Graph(int nodes, boolean directed) {
-        num_nodes = nodes;
-        this.directed = directed;
+    public Graph(List<Integer> vertexes, List<Edge> edges, boolean directed) {
+      this.vertexes = vertexes;
+      this.edges = edges;
+      this.directed = directed;
+      this.num_nodes = vertexes.size();
+    }
+
+    public List<Integer> getVertexes() {
+      return vertexes;
+    }
+
+    public List<Edge> getEdges() {
+      return edges;
     }
 
     public int getNumNodes() {
@@ -18,17 +32,19 @@ public abstract class Graph {
         return directed;
     }
 
-    public abstract void addEdge(int source, int target, int weight);
+    public abstract void addEdge(Integer source, Integer target);
+    
+    public abstract void addEdge(Integer source, Integer target, int weight);
 
     public void addEdge(EdgeInterface e) {
         addEdge(e.source(), e.target(), e.weight());
     }
 
-    public abstract int removeEdge(int source, int target);
+    public abstract int removeEdge(Integer source, Integer target);
 
     public abstract void removeAllEdges();
 
-    public abstract int weightOfEdge(int source, int target);
+    public abstract int weightOfEdge(Integer source, Integer target);
 
     public abstract Graph toAltGraphRepr(Graph G);
 

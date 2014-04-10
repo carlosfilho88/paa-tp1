@@ -1,7 +1,7 @@
 package graph;
 
 public interface EdgeInterface {
-    public int source();
-    public int target();
+    public Integer source();
+    public Integer target();
     public int weight();
 }
