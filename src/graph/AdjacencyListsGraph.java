@@ -3,6 +3,7 @@ package graph;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 class AdjacencyListElement {
 
@@ -22,17 +23,6 @@ class AdjacencyListElement {
     public String toString() {
         return "" + target;
     }
-
-	
-    @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((target == null) ? 0 : target.hashCode());
-		result = prime * result + weight;
-		return result;
-	}
-    
 
 	@Override
 	public boolean equals(Object obj) {
@@ -129,12 +119,12 @@ public class AdjacencyListsGraph extends Graph {
     }
 
     public String toString() {
-        String s = "";
+    	String s = "";
         for (int i = 0; i < num_nodes; i++) {
-            s += i + ": [";
+            s += Main.ivMap.get(i) + ": [";
 
             for (Iterator<AdjacencyListElement> iter = lists[i].iterator(); iter.hasNext();)
-                s += " " + iter.next();
+                s += " " + Main.ivMap.get(iter.next().target);
             s += " ]\n";
         }
 

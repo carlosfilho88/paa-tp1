@@ -8,9 +8,9 @@ import java.util.Queue;
 public class Betweeness {
 
     public static void BFS(Graph g, Integer source) {
-    	boolean[] marked = new boolean[g.getNumNodes()];  // marked[v] = is there an s-v path
-	    int[] edgeTo = new int[g.getNumNodes()];      // edgeTo[v] = previous edge on shortest s-v path
-	    int[] distTo = new int[g.getNumNodes()];      // distTo[v] = number of edges shortest s-v path
+    	boolean[] marked = new boolean[g.getNumNodes()];
+	    int[] edgeTo = new int[g.getNumNodes()];
+	    int[] distTo = new int[g.getNumNodes()];
     	    
     	Queue<AdjacencyListElement> queue = new LinkedList<AdjacencyListElement>();
     	ArrayList<AdjacencyListElement> adjList;
@@ -27,7 +27,7 @@ public class Betweeness {
         while (!queue.isEmpty()) {
             adjElement = queue.poll();
             adjList = ((AdjacencyListsGraph)g).getAdjListOfNode(adjElement.target);
-            System.out.print(adjElement.target + " ");
+            System.out.print(Main.ivMap.get(adjElement.target) + " ");
             for (Iterator<AdjacencyListElement> iter = adjList.iterator(); iter.hasNext();) {
         		AdjacencyListElement e = iter.next();
         		if (!marked[e.target]) {

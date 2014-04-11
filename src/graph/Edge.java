@@ -7,6 +7,7 @@ public class Edge implements EdgeInterface {
     public Edge(Integer source, Integer target) {
         this.source = source;
         this.target = target;
+        this.weight = 1;
     }
 
     public Edge(Integer source, Integer target, Integer weight) {

@@ -4,8 +4,8 @@ import java.util.List;
 
 public abstract class Graph {
     
-    private List<Integer> vertexes;
-    private List<Edge> edges;
+	protected List<Integer> vertexes;
+	protected List<Edge> edges;
     protected int num_nodes;
     protected boolean directed;
 
