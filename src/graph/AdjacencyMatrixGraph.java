@@ -4,7 +4,7 @@ import java.util.List;
 
 public class AdjacencyMatrixGraph extends Graph {
 
-    private int[][] edges;
+	public int[][] edges;
 
     public AdjacencyMatrixGraph(List<Integer> v, List<Edge> e, boolean d) {
         super(v, e, d);
@@ -12,7 +12,7 @@ public class AdjacencyMatrixGraph extends Graph {
         edges = new int[num_nodes][num_nodes];
         for (int i = 0; i < num_nodes; i++)
             for (int j = 0; j < num_nodes; j++)
-                edges[i][j] = Integer.MAX_VALUE;
+                edges[i][j] = 0;
     }
     
     public void addEdge(Integer source, Integer target) {
@@ -51,7 +51,7 @@ public class AdjacencyMatrixGraph extends Graph {
         String s = "";
         for (int i = 0; i < num_nodes; i++) {
             for (int j = 0; j < num_nodes; j++) {
-                if (edges[i][j] == Integer.MAX_VALUE)
+                if (edges[i][j] == 0)
                     s += " -" + "\t";
                 else
                     s += " " + edges[i][j] + "\t";
