@@ -58,16 +58,14 @@ public class Main {
 			g.addEdge(edge.source(), edge.target());
 		}
         	
-        System.out.println("Adjacency Matrix representation:\n" + g);
+//        System.out.println("Adjacency Matrix representation:\n" + g);
         betweeness = new Betweeness(g);
-//        System.out.println(betweeness.BFS(0).toString());
-        betweeness.computeShortestPaths();
-        System.out.println(betweeness.toStringNPaths());
-        System.out.println(betweeness.toStringDists());
+        
         for (int i = 0; i < vertexes.size(); i++) {
 //        	System.out.println(betweeness.computeBetweenness(i));
-//        	//betweeness.BFS(i);
-//        	System.out.println(betweeness.toString());
+        	betweeness.BFS(i);
+        	System.out.print(betweeness.toStringDists());
+//	        System.out.print(betweeness.toStringNPaths());
         }
         
     }

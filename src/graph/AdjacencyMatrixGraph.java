@@ -51,10 +51,10 @@ public class AdjacencyMatrixGraph extends Graph {
         String s = "";
         for (int i = 0; i < num_nodes; i++) {
             for (int j = 0; j < num_nodes; j++) {
-                if (edges[i][j] == 0)
-                    s += " -" + "\t";
+                if (edges[i][j] == Integer.MAX_VALUE)
+                    s += " -";
                 else
-                    s += " " + edges[i][j] + "\t";
+                    s += " " + edges[i][j];
             }
             s += "\n";
         }
