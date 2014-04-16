@@ -34,7 +34,7 @@ public abstract class Graph {
 
     public abstract void addEdge(Integer source, Integer target);
     
-    public abstract void addEdge(Integer source, Integer target, int weight);
+    public abstract void addEdge(Integer source, Integer target, Integer weight);
 
     public void addEdge(EdgeInterface e) {
         addEdge(e.source(), e.target(), e.weight());

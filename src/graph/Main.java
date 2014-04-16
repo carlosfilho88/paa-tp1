@@ -51,22 +51,29 @@ public class Main {
         }
         
     	vertexes.addAll(vMap.values());
-        Graph g = new AdjacencyMatrixGraph(vertexes, edges, false);
+    	AdjacencyMatrixGraph g = new AdjacencyMatrixGraph(vertexes, edges, false);
         
         for (Iterator<Edge> iterator = edges.iterator(); iterator.hasNext();) {
 			Edge edge = (Edge) iterator.next();
 			g.addEdge(edge.source(), edge.target());
 		}
         	
-//        System.out.println("Adjacency Matrix representation:\n" + g);
-        betweeness = new Betweeness(g);
+//        g.edges[5][6] = 0;
+//        g.edges[6][5] = 0;
         
-        for (int i = 0; i < vertexes.size(); i++) {
-//        	System.out.println(betweeness.computeBetweenness(i));
-        	betweeness.BFS(i);
-        	System.out.print(betweeness.toStringDists());
-//	        System.out.print(betweeness.toStringNPaths());
+        betweeness = new Betweeness(g);
+        System.out.println(g.getNumNodes());
+        for (int i = 0; i <= g.getNumNodes(); i++) {
+			if(Main.ivMap.containsKey(i)) {//i = id logico
+//				betweeness.BFS(i);
+        	System.out.println(betweeness.BFS(i).toString());
+			}
         }
+        System.out.println();
+//        System.out.println(betweeness.toStringDists());
+//        System.out.println(betweeness.toStringNPaths());
+//        System.out.println("Adjacency Matrix representation:\n" + g);
+        System.out.println(betweeness.toStringBetweenness());
         
     }
 }

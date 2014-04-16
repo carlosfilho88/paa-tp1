@@ -21,7 +21,7 @@ public class AdjacencyMatrixGraph extends Graph {
             edges[target][source] = 1;
     }
 
-    public void addEdge(Integer source, Integer target, int weight) {
+    public void addEdge(Integer source, Integer target, Integer weight) {
         edges[source][target] = weight;
         if (!directed)
             edges[target][source] = weight;

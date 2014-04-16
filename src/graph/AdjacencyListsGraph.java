@@ -7,14 +7,14 @@ import java.util.List;
 class AdjacencyListElement {
 
 	public Integer target;
-    public int weight;
+    public Integer weight;
     
     public AdjacencyListElement(Integer target) {
         this.target = target;
         this.weight = 1;
     }
 
-    public AdjacencyListElement(Integer target, int weight) {
+    public AdjacencyListElement(Integer target, Integer weight) {
         this.target = target;
         this.weight = weight;
     }
@@ -66,7 +66,7 @@ public class AdjacencyListsGraph extends Graph {
         }
     }
     
-    public void addEdge(Integer source, Integer target, int weight) {
+    public void addEdge(Integer source, Integer target, Integer weight) {
         if (!directed) {
         	lists[target].add(new AdjacencyListElement(source, weight));
         	lists[source].add(new AdjacencyListElement(target, weight));
